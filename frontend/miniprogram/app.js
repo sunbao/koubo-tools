@@ -2,8 +2,8 @@ App({
   globalData: {
     userInfo: null,
     token: null,
-    baseUrl: 'http://localhost:8080/api',
-    websocketUrl: 'ws://localhost:8080/ws/teleprompter'
+    baseUrl: 'http://localhost:8083/api',
+    websocketUrl: 'ws://localhost:8084/ws/teleprompter'
   },
   
   onLaunch() {

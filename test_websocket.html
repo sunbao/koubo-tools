@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+        #messages {
+            height: 200px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .message {
+            margin: 5px 0;
+            padding: 5px;
+            background-color: #e9e9e9;
+        }
+    </style>
+</head>
+<body>
+    <h1>WebSocket多端同步测试</h1>
+    
+    <div class="container">
+        <h2>连接状态</h2>
+        <div id="status">未连接</div>
+        <button id="connect">连接WebSocket</button>
+        <button id="disconnect">断开连接</button>
+    </div>
+    
+    <div class="container">
+        <h2>发送消息</h2>
+        <input type="text" id="messageInput" placeholder="输入要发送的消息">
+        <button id="send">发送</button>
+    </div>
+    
+    <div class="container">
+        <h2>接收消息</h2>
+        <div id="messages"></div>
+    </div>
+    
+    <div class="container">
+        <h2>提词器控制</h2>
+        <button id="play">播放</button>
+        <button id="pause">暂停</button>
+        <button id="stop">停止</button>
+    </div>
+
+    <script>
+        let socket = null;
+        
+        function addMessage(message) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            messageDiv.textContent = message;
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        
+        function connect() {
+            if (socket && socket.readyState === WebSocket.OPEN) {
+                addMessage('已经连接');
+                return;
+            }
+            
+            socket = new WebSocket('ws://localhost:8084/ws/teleprompter');
+            
+            socket.onopen = function(event) {
+                document.getElementById('status').textContent = '已连接';
+                addMessage('WebSocket连接已建立');
+            };
+            
+            socket.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                addMessage('收到消息: ' + data.data);
+                
+                // 处理控制命令
+                if (data.data.startsWith('CONTROL:')) {
+                    const command = data.data.substring(8);
+                    addMessage('执行控制命令: ' + command);
+                }
+            };
+            
+            socket.onclose = function(event) {
+                document.getElementById('status').textContent = '已断开';
+                addMessage('WebSocket连接已关闭');
+            };
+            
+            socket.onerror = function(error) {
+                addMessage('WebSocket错误: ' + error);
+            };
+        }
+        
+        function disconnect() {
+            if (socket) {
+                socket.close();
+            }
+        }
+        
+        function sendMessage() {
+            if (!socket || socket.readyState !== WebSocket.OPEN) {
+                addMessage('请先连接WebSocket');
+                return;
+            }
+            
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value;
+            if (message) {
+                socket.send(JSON.stringify({data: message}));
+                addMessage('发送消息: ' + message);
+                messageInput.value = '';
+            }
+        }
+        
+        function sendControlCommand(command) {
+            if (!socket || socket.readyState !== WebSocket.OPEN) {
+                addMessage('请先连接WebSocket');
+                return;
+            }
+            
+            socket.send(JSON.stringify({data: 'CONTROL:' + command}));
+            addMessage('发送控制命令: ' + command);
+        }
+        
+        // 绑定事件
+        document.getElementById('connect').onclick = connect;
+        document.getElementById('disconnect').onclick = disconnect;
+        document.getElementById('send').onclick = sendMessage;
+        document.getElementById('play').onclick = () => sendControlCommand('PLAY');
+        document.getElementById('pause').onclick = () => sendControlCommand('PAUSE');
+        document.getElementById('stop').onclick = () => sendControlCommand('STOP');
+        
+        // 回车发送消息
+        document.getElementById('messageInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
