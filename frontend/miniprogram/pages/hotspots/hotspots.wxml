@@ -1,0 +1,45 @@
+<view class="page-container">
+  <view class="page-title">热点推荐</view>
+  
+  <!-- 筛选条件 -->
+  <view class="filter-container card">
+    <picker bindchange="onPlatformChange" value="{{platforms.indexOf(selectedPlatform)}}" range="{{platforms}}">
+      <view class="filter-item">
+        平台: {{selectedPlatform}}
+      </view>
+    </picker>
+    
+    <picker bindchange="onTypeChange" value="{{types.indexOf(selectedType)}}" range="{{types}}">
+      <view class="filter-item">
+        类型: {{selectedType}}
+      </view>
+    </picker>
+  </view>
+  
+  <!-- 热点列表 -->
+  <view class="hotspots-container">
+    <view wx:if="{{loading}}" class="loading">
+      加载中...
+    </view>
+    
+    <view wx:elif="{{hotspots.length === 0}}" class="loading">
+      暂无热点数据
+    </view>
+    
+    <view wx:else>
+      <view wx:for="{{hotspots}}" wx:key="hotId" class="hotspot-item card">
+        <view class="hotspot-title">{{item.title}}</view>
+        <view class="hotspot-content">{{item.content}}</view>
+        <view class="hotspot-meta">
+          <text class="hotspot-platform">{{item.platform}}</text>
+          <text class="hotspot-type">{{item.type}}</text>
+          <text class="hotspot-heat">热度: {{item.heatIndex}}</text>
+        </view>
+        <view class="hotspot-tags">
+          <text wx:for="{{item.tags}}" wx:key="index" class="tag">{{item}}</text>
+        </view>
+        <view class="btn" bindtap="generateScript" data-id="{{item.hotId}}">生成文案</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,60 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/hotspots/hotspots",
+    "pages/scripts/scripts",
+    "pages/teleprompter/teleprompter",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "爆款内容生成器",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home_selected.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/hotspots/hotspots",
+        "iconPath": "assets/icons/hot.png",
+        "selectedIconPath": "assets/icons/hot_selected.png",
+        "text": "热点"
+      },
+      {
+        "pagePath": "pages/scripts/scripts",
+        "iconPath": "assets/icons/script.png",
+        "selectedIconPath": "assets/icons/script_selected.png",
+        "text": "文案"
+      },
+      {
+        "pagePath": "pages/teleprompter/teleprompter",
+        "iconPath": "assets/icons/teleprompter.png",
+        "selectedIconPath": "assets/icons/teleprompter_selected.png",
+        "text": "提词器"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "iconPath": "assets/icons/profile.png",
+        "selectedIconPath": "assets/icons/profile_selected.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
+}

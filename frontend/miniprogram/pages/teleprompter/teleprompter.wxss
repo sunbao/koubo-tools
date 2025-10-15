@@ -1,0 +1,62 @@
+.connection-status {
+  text-align: right;
+  margin-bottom: 20rpx;
+}
+
+.status-connected {
+  color: #34C759;
+}
+
+.status-disconnected {
+  color: #FF3B30;
+}
+
+.teleprompter-container {
+  min-height: 400rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.script-content-wrapper {
+  height: 400rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.script-content {
+  font-size: 32rpx;
+  line-height: 1.8;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.control-panel {
+  margin-bottom: 20rpx;
+}
+
+.control-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30rpx;
+}
+
+.control-btn {
+  width: 150rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: 0 20rpx;
+}
+
+.speed-control {
+  margin-bottom: 30rpx;
+}
+
+.actions {
+  text-align: center;
+}

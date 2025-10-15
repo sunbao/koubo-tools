@@ -1,0 +1,42 @@
+<view class="page-container">
+  <view class="page-title">提词器</view>
+  
+  <!-- 连接状态 -->
+  <view class="connection-status" wx:if="{{isConnected}}">
+    <text class="status-connected">● 已连接</text>
+  </view>
+  <view class="connection-status" wx:else>
+    <text class="status-disconnected">● 未连接</text>
+  </view>
+  
+  <!-- 文案内容 -->
+  <view wx:if="{{content}}" class="teleprompter-container card">
+    <view class="script-content-wrapper">
+      <view class="script-content" style="transform: translateY({{scrollPosition}}px); transition: transform {{scrollDuration}}s linear;">
+        {{content}}
+      </view>
+    </view>
+  </view>
+  
+  <view wx:else class="loading">
+    请先选择一个文案
+  </view>
+  
+  <!-- 控制面板 -->
+  <view class="control-panel card">
+    <view class="control-buttons">
+      <button class="control-btn" bindtap="play" wx:if="{{!isPlaying}}">播放</button>
+      <button class="control-btn" bindtap="pause" wx:if="{{isPlaying}}">暂停</button>
+      <button class="control-btn" bindtap="stop">停止</button>
+    </view>
+    
+    <view class="speed-control">
+      <text>语速: {{speed}} 字/分钟</text>
+      <slider min="100" max="300" value="{{speed}}" bindchange="onSpeedChange" />
+    </view>
+    
+    <view class="actions">
+      <button class="btn" bindtap="pushToTeleprompter" wx:if="{{script}}">推送多端同步</button>
+    </view>
+  </view>
+</view>

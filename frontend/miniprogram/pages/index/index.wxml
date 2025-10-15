@@ -1,0 +1,51 @@
+<view class="page-container">
+  <view class="page-title">爆款内容生成器</view>
+  
+  <!-- 未登录提示 -->
+  <view wx:if="{{!isLoggedIn}}" class="card">
+    <view class="card-title">欢迎使用</view>
+    <view>请先登录以使用全部功能</view>
+    <view class="btn" bindtap="goToLogin">立即登录</view>
+  </view>
+  
+  <!-- 已登录内容 -->
+  <view wx:else>
+    <!-- 快捷操作 -->
+    <view class="card">
+      <view class="card-title">快捷操作</view>
+      <view class="btn" bindtap="goToHotspots">查看热点</view>
+      <view class="btn" bindtap="goToScripts">我的文案</view>
+      <view class="btn" bindtap="goToTeleprompter">提词器</view>
+    </view>
+    
+    <!-- 热点推荐 -->
+    <view class="card">
+      <view class="card-title">热点推荐</view>
+      <view wx:if="{{hotspots.length === 0}}" class="loading">
+        暂无热点数据
+      </view>
+      <view wx:else>
+        <view wx:for="{{hotspots}}" wx:key="hotId" class="hotspot-item card">
+          <view class="hotspot-title">{{item.title}}</view>
+          <view class="hotspot-platform">{{item.platform}}</view>
+          <view class="hotspot-heat">热度: {{item.heatIndex}}</view>
+          <view class="btn" bindtap="generateScript" data-id="{{item.hotId}}">生成文案</view>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 最新文案 -->
+    <view class="card">
+      <view class="card-title">最新文案</view>
+      <view wx:if="{{scripts.length === 0}}" class="loading">
+        暂无文案数据
+      </view>
+      <view wx:else>
+        <view wx:for="{{scripts}}" wx:key="scriptId" class="script-item">
+          <view class="script-title">{{item.title}}</view>
+          <view class="script-content">{{item.content.substring(0, 50)}}...</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

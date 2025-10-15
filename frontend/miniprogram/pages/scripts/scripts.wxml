@@ -1,0 +1,25 @@
+<view class="page-container">
+  <view class="page-title">我的文案</view>
+  
+  <view wx:if="{{loading}}" class="loading">
+    加载中...
+  </view>
+  
+  <view wx:elif="{{scripts.length === 0}}" class="loading">
+    暂无文案数据
+  </view>
+  
+  <view wx:else>
+    <view wx:for="{{scripts}}" wx:key="scriptId" class="script-item card">
+      <view class="script-header">
+        <view class="script-title">{{item.title}}</view>
+        <view class="script-platform">{{item.platform}}</view>
+      </view>
+      <view class="script-content">{{item.content}}</view>
+      <view class="script-actions">
+        <button class="action-btn" bindtap="goToTeleprompter" data-id="{{item.scriptId}}">提词器</button>
+        <button class="action-btn" bindtap="deleteScript" data-id="{{item.scriptId}}">删除</button>
+      </view>
+    </view>
+  </view>
+</view>

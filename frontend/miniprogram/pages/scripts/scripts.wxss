@@ -1,0 +1,44 @@
+.script-item {
+  margin-bottom: 20rpx;
+}
+
+.script-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.script-title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.script-platform {
+  font-size: 24rpx;
+  color: #007AFF;
+  background-color: #E5F2FF;
+  padding: 5rpx 15rpx;
+  border-radius: 10rpx;
+}
+
+.script-content {
+  font-size: 28rpx;
+  color: #333333;
+  line-height: 1.5;
+  margin-bottom: 20rpx;
+}
+
+.script-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action-btn {
+  width: auto;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 0 30rpx;
+  font-size: 24rpx;
+  margin-left: 20rpx;
+}

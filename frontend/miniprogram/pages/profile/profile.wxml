@@ -1,0 +1,65 @@
+<view class="page-container">
+  <view class="page-title">个人中心</view>
+  
+  <!-- 未登录状态 -->
+  <view wx:if="{{!isLoggedIn}}" class="card">
+    <view class="card-title">用户登录</view>
+    
+    <input class="input" placeholder="用户名" value="{{username}}" bindinput="onUsernameInput" />
+    <input class="input" placeholder="密码" password value="{{password}}" bindinput="onPasswordInput" />
+    
+    <view class="btn" bindtap="login">登录</view>
+    <view class="btn" bindtap="register">注册</view>
+  </view>
+  
+  <!-- 已登录状态 -->
+  <view wx:else>
+    <!-- 用户信息 -->
+    <view class="card user-info">
+      <view class="user-avatar">
+        <image src="/assets/icons/profile.png" mode="aspectFit" />
+      </view>
+      <view class="user-details">
+        <view class="username">{{userInfo.username}}</view>
+        <view class="user-id">ID: {{userInfo.userId}}</view>
+      </view>
+    </view>
+    
+    <!-- 个人设置 -->
+    <view class="card">
+      <view class="card-title">个人设置</view>
+      
+      <view class="setting-item">
+        <text>口播类型</text>
+        <picker bindchange="onBroadcastTypeChange" value="{{['娱乐', '教育', '产品介绍', '生活分享'].indexOf(broadcastType)}}" range="{{['娱乐', '教育', '产品介绍', '生活分享']}}">
+          <view class="picker">
+            {{broadcastType}}
+          </view>
+        </picker>
+      </view>
+      
+      <view class="setting-item">
+        <text>账号风格</text>
+        <picker bindchange="onAccountStyleChange" value="{{['幽默风趣', '专业严谨', '温暖治愈', '激情澎湃'].indexOf(accountStyle)}}" range="{{['幽默风趣', '专业严谨', '温暖治愈', '激情澎湃']}}">
+          <view class="picker">
+            {{accountStyle}}
+          </view>
+        </picker>
+      </view>
+      
+      <view class="setting-item">
+        <text>目标平台</text>
+        <picker bindchange="onPlatformSettingsChange" value="{{['抖音', '快手', '小红书', '视频号'].indexOf(platformSettings)}}" range="{{['抖音', '快手', '小红书', '视频号']}}">
+          <view class="picker">
+            {{platformSettings}}
+          </view>
+        </picker>
+      </view>
+      
+      <view class="btn" bindtap="updateProfile">保存设置</view>
+    </view>
+    
+    <!-- 退出登录 -->
+    <view class="btn" bindtap="logout">退出登录</view>
+  </view>
+</view>

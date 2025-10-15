@@ -1,0 +1,66 @@
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.filter-item {
+  flex: 1;
+  padding: 20rpx;
+  text-align: center;
+  border: 1rpx solid #E5E5E5;
+  margin: 0 10rpx;
+  border-radius: 10rpx;
+}
+
+.hotspot-item {
+  margin-bottom: 20rpx;
+}
+
+.hotspot-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 15rpx;
+}
+
+.hotspot-content {
+  font-size: 28rpx;
+  color: #666666;
+  margin-bottom: 20rpx;
+  line-height: 1.5;
+}
+
+.hotspot-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15rpx;
+}
+
+.hotspot-platform {
+  color: #007AFF;
+  font-size: 24rpx;
+}
+
+.hotspot-type {
+  color: #34C759;
+  font-size: 24rpx;
+}
+
+.hotspot-heat {
+  color: #FF9500;
+  font-size: 24rpx;
+}
+
+.hotspot-tags {
+  margin-bottom: 20rpx;
+}
+
+.tag {
+  display: inline-block;
+  background-color: #F0F0F0;
+  color: #666666;
+  font-size: 20rpx;
+  padding: 5rpx 15rpx;
+  border-radius: 20rpx;
+  margin-right: 10rpx;
+}

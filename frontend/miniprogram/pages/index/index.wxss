@@ -1,0 +1,45 @@
+.hotspot-item {
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  border: 1rpx solid #E5E5E5;
+  border-radius: 10rpx;
+}
+
+.hotspot-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.hotspot-platform {
+  color: #007AFF;
+  font-size: 24rpx;
+  margin-bottom: 10rpx;
+}
+
+.hotspot-heat {
+  color: #FF9500;
+  font-size: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.script-item {
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #E5E5E5;
+}
+
+.script-item:last-child {
+  border-bottom: none;
+}
+
+.script-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.script-content {
+  font-size: 24rpx;
+  color: #666666;
+}
