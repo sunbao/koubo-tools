@@ -7,7 +7,7 @@ import com.alibaba.dashscope.common.Message;
 import com.alibaba.dashscope.common.Role;
 import com.alibaba.dashscope.exception.ApiException;
 import com.alibaba.dashscope.exception.InputRequiredException;
-import com.alibaba.dashscope.exception.TokenUnavailableException;
+import com.alibaba.dashscope.exception.NoApiKeyException;
 import com.alibaba.dashscope.utils.Constants;
 import com.koubotools.scriptgenerator.model.Hotspot;
 import com.koubotools.scriptgenerator.model.Script;
@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -99,10 +100,10 @@ public class AiScriptGenerationService {
             // 构建参数
             QwenParam param = QwenParam.builder()
                     .model(modelName)
-                    .messages(List.of(message))
+                    .messages(Collections.singletonList(message))
                     .resultFormat(QwenParam.ResultFormat.MESSAGE)
                     .topP(0.8)
-                    .temperature(0.7)
+                    .temperature(0.7f)
                     .maxTokens(512)
                     .build();
             
@@ -112,7 +113,7 @@ public class AiScriptGenerationService {
             // 提取生成的文本
             String generatedText = result.getOutput().getChoices().get(0).getMessage().getContent();
             return generatedText;
-        } catch (ApiException | TokenUnavailableException | InputRequiredException e) {
+        } catch (ApiException | NoApiKeyException | InputRequiredException e) {
             System.err.println("调用阿里百炼平台API失败: " + e.getMessage());
             // 返回默认文案
             return "这是一个由阿里百炼平台AI生成的示例口播文案，基于热点话题：" + prompt.substring(0, Math.min(prompt.length(), 30)) + "...";

@@ -23,8 +23,13 @@ public class AiConfig {
         return new Generation();
     }
     
+    @Value("${dashscope.model.name}")
+    private String dashscopeModelName;
+    
     @Bean
     public QwenParam qwenParam() {
-        return QwenParam.builder().build();
+        return QwenParam.builder()
+                .model(dashscopeModelName)
+                .build();
     }
 }

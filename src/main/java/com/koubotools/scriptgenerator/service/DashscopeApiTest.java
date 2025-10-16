@@ -7,12 +7,13 @@ import com.alibaba.dashscope.common.Message;
 import com.alibaba.dashscope.common.Role;
 import com.alibaba.dashscope.exception.ApiException;
 import com.alibaba.dashscope.exception.InputRequiredException;
-import com.alibaba.dashscope.exception.TokenUnavailableException;
+import com.alibaba.dashscope.exception.NoApiKeyException;
 import com.alibaba.dashscope.utils.Constants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -43,10 +44,10 @@ public class DashscopeApiTest {
             // 构建参数
             QwenParam param = QwenParam.builder()
                     .model(modelName)
-                    .messages(List.of(message))
+                    .messages(Collections.singletonList(message))
                     .resultFormat(QwenParam.ResultFormat.MESSAGE)
                     .topP(0.8)
-                    .temperature(0.7)
+                    .temperature(0.7f)
                     .maxTokens(100)
                     .build();
             
@@ -58,7 +59,7 @@ public class DashscopeApiTest {
             System.out.println("阿里百炼平台API测试成功，响应内容: " + response);
             
             return true;
-        } catch (ApiException | TokenUnavailableException | InputRequiredException e) {
+        } catch (ApiException | NoApiKeyException | InputRequiredException e) {
             System.err.println("阿里百炼平台API测试失败: " + e.getMessage());
             e.printStackTrace();
             return false;

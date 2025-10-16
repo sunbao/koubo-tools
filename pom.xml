@@ -22,7 +22,8 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-ai.version>0.8.1</spring-ai.version>
+        <spring-ai.version>1.0.0-M6</spring-ai.version>
+        <dashscope.version>2.21.12</dashscope.version>
     </properties>
 
     <dependencies>
@@ -50,16 +51,16 @@
         
         <!-- Spring AI dependency -->
         <dependency>
-            <groupId>org.springframework.experimental.ai</groupId>
+            <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-core</artifactId>
             <version>${spring-ai.version}</version>
         </dependency>
         
-        <!-- 阿里通义千问Spring Boot Starter -->
+        <!-- 阿里通义千问Java SDK -->
         <dependency>
             <groupId>com.alibaba</groupId>
-            <artifactId>dashscope-spring-boot-starter</artifactId>
-            <version>1.0.0</version>
+            <artifactId>dashscope-sdk-java</artifactId>
+            <version>${dashscope.version}</version>
         </dependency>
         
         <!-- WebSocket支持 -->
@@ -107,4 +108,33 @@
                 <enabled>false</enabled>
             </releases>
         </repository>
+        <repository>
+            <id>spring-releases</id>
+            <name>Spring Releases</name>
+            <url>https://repo.spring.io/release</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-spring-ai</id>
+            <name>Spring AI Repository</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>aliyun-releases</id>
+            <name>Aliyun Releases</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
     </repositories>
+
+</project>
