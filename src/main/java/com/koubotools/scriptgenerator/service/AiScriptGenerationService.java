@@ -83,11 +83,11 @@ public class AiScriptGenerationService {
     
     /**
      * 调用AI服务生成文案
-     * 使用阿里的通义千问模型
+     * 使用阿里的通义千问模型（通过阿里百炼平台）
      */
     private String callAiService(String prompt) {
         try {
-            // 设置API密钥
+            // 设置API密钥（阿里百炼平台）
             Constants.apiKey = dashscopeApiKey;
             
             // 构建消息
@@ -106,16 +106,16 @@ public class AiScriptGenerationService {
                     .maxTokens(512)
                     .build();
             
-            // 调用通义千问API
+            // 调用通义千问API（通过阿里百炼平台）
             GenerationResult result = generation.call(param);
             
             // 提取生成的文本
             String generatedText = result.getOutput().getChoices().get(0).getMessage().getContent();
             return generatedText;
         } catch (ApiException | TokenUnavailableException | InputRequiredException e) {
-            System.err.println("调用通义千问API失败: " + e.getMessage());
+            System.err.println("调用阿里百炼平台API失败: " + e.getMessage());
             // 返回默认文案
-            return "这是一个由通义千问AI生成的示例口播文案，基于热点话题：" + prompt.substring(0, Math.min(prompt.length(), 30)) + "...";
+            return "这是一个由阿里百炼平台AI生成的示例口播文案，基于热点话题：" + prompt.substring(0, Math.min(prompt.length(), 30)) + "...";
         } catch (Exception e) {
             System.err.println("AI服务调用失败: " + e.getMessage());
             // 返回默认文案

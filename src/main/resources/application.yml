@@ -37,7 +37,7 @@ spring:
 # 阿里通义千问配置
 dashscope:
   api:
-    key: ${DASHSCOPE_API_KEY:your-dashscope-api-key-here}
+    key: sk-b551605ddd164c9990ac784ad013b472
   model:
     name: qwen-turbo
 

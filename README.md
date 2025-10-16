@@ -39,7 +39,7 @@ src/
 ## 技术栈
 
 - 后端：Spring Boot + Spring AI + JPA + MySQL + Redis
-- AI服务：阿里通义千问系列大模型
+- AI服务：阿里通义千问系列大模型（通过阿里百炼平台）
 - 实时通信：WebSocket
 - 前端：微信小程序（后续开发）
 
@@ -57,7 +57,7 @@ src/
 
 ### 3. AI文案生成
 - 基于用户风格和热点生成个性化文案
-- 集成阿里通义千问大模型
+- 集成阿里通义千问大模型（通过阿里百炼平台）
 - 文案质量评估与优化
 
 ### 4. 提词器功能
@@ -105,6 +105,29 @@ src/
 - `POST /api/teleprompter/speed?scriptId={scriptId}` - 计算最佳语速
 - `POST /api/teleprompter/duration?scriptId={scriptId}&speed={speed}` - 计算滚动持续时间
 
+## 阿里百炼平台API配置
+
+### 获取API Key
+1. 访问 [阿里云官网](https://www.aliyun.com/)
+2. 注册或登录账号
+3. 进入[阿里百炼平台](https://help.aliyun.com/zh/bailian)
+4. 创建并获取您的API Key
+
+### 配置方式
+API Key已经在application.yml中配置：
+```yaml
+dashscope:
+  api:
+    key: sk-b551605ddd164c9990ac784ad013b472
+  model:
+    name: qwen-turbo
+```
+
+### 支持的模型
+- `qwen-turbo` - 推理速度较快的模型
+- `qwen-plus` - 效果平衡的模型
+- `qwen-max` - 效果最好的模型
+
 ## 配置说明
 
 ### 数据库配置
@@ -137,7 +160,7 @@ dashscope:
 
 1. 克隆项目
 2. 配置MySQL数据库和Redis
-3. 设置阿里通义千问API Key
+3. 设置阿里百炼平台API Key（已配置）
 4. 运行项目：`mvn spring-boot:run`
 5. 访问API：http://localhost:8080
 
