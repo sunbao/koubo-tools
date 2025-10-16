@@ -180,3 +180,31 @@ docker build -t script-generator .
 # 运行容器
 docker run -p 8080:8080 script-generator
 ```
+
+### Docker Compose部署（推荐）
+
+使用Docker Compose可以一键部署应用及其依赖服务：
+```bash
+# 构建并启动所有服务
+docker-compose up -d
+
+# 查看服务状态
+docker-compose ps
+
+# 查看服务日志
+docker-compose logs
+```
+
+该部署方式会同时启动：
+- Java后端服务（端口8080）
+- MySQL数据库（端口3306）
+- Redis缓存（端口6379）
+
+### 直接运行
+
+如果不使用Docker，可以直接运行Java应用：
+```bash
+mvn spring-boot:run
+```
+
+注意：直接运行需要本地已安装并配置好MySQL和Redis。

@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # Java后端服务
+  koubo-app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - koubo-mysql
+      - koubo-redis
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://koubo-mysql:3306/script_generator?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+      - SPRING_REDIS_HOST=koubo-redis
+    networks:
+      - koubo-network
+    container_name: koubo-app
+
+  # MySQL数据库
+  koubo-mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=script_generator
+    ports:
+      - "3306:3306"
+    volumes:
+      - koubo-mysql-data:/var/lib/mysql
+    networks:
+      - koubo-network
+    container_name: koubo-mysql
+
+  # Redis缓存
+  koubo-redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - koubo-network
+    container_name: koubo-redis
+
+# 定义数据卷
+volumes:
+  koubo-mysql-data:
+
+# 定义网络
+networks:
+  koubo-network:
+    driver: bridge
